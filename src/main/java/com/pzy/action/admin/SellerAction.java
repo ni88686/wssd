@@ -29,7 +29,7 @@ public class SellerAction extends ActionSupport {
 	private Map<String, Object> resultMap = new HashMap<String, Object>();
 
 	private String name;
-	private Long id;
+	private String id;
 	private Seller seller;
 	private List<Seller> sellers;
 	@Autowired
@@ -138,11 +138,11 @@ public class SellerAction extends ActionSupport {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

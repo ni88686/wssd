@@ -57,6 +57,10 @@ public class IndexAction  extends ActionSupport{
       */
      @Action(value = "gologin", results = { @Result(name = "success", location = "/WEB-INF/views/admin/index.jsp"),@Result(name = "input", location = "/WEB-INF/views/admin/login.jsp") })
      public String gologin(){
+    	 /*AdminUser adminUser1 = new AdminUser();
+    	 adminUser1.setName(this.userName);
+    	 adminUser1.setPassword( this.password);
+    	 adminUserService.save(adminUser1);*/
     	AdminUser adminUser=adminUserService.login(this.userName, this.password);
     	
     	if(adminUser!=null){

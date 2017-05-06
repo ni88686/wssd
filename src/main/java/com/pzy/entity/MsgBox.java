@@ -2,27 +2,18 @@ package com.pzy.entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import org.apache.struts2.json.annotations.JSON;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 /***
  *  @author 263608237@qq.com
  *留言板
  */
-@Entity
-@Table(name = "t_msgbox")
+@Document(collection = "MsgBox")  
 public class MsgBox {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	private String title;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
 	private String context;
 	private Date createDate;
@@ -54,10 +45,10 @@ public class MsgBox {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getReply() {

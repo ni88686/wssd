@@ -4,17 +4,12 @@ package com.pzy.service;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.pzy.entity.Order;
@@ -39,46 +34,41 @@ public class OrderService {
 		return orderRepository.findByUser(user);
 	}
     public Page<Order> findAll(final int pageNumber, final int pageSize,final String state){
-        PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
-       
-        Specification<Order> spec = new Specification<Order>() {
-             public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-             Predicate predicate = cb.conjunction();
-             if (state != null) {
-                  predicate.getExpressions().add(cb.equal(root.get("state").as(String.class), state));
-             }
-             return predicate;
-             }
-        };
-        Page<Order> result = (Page<Order>) orderRepository.findAll(spec, pageRequest);
-        return result;
+    	 PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+         Page<Order> result ;
+         if(!StringUtils.isBlank(state)){
+        	 result =  (Page<Order>) orderRepository.findByState(state, pageRequest);
+         }else{
+        	 result =  (Page<Order>) orderRepository.findAll( pageRequest);
+         }
+         return result;
     	}
     
+    /***
+     * todo
+     * @param pageNumber
+     * @param pageSize
+     * @param b
+     * @param e
+     * @return
+     */
     public Page<Order> findAll(final int pageNumber, final int pageSize,final Date b,final Date e){
-        PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
-       
-        Specification<Order> spec = new Specification<Order>() {
-             public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-             Predicate predicate = cb.conjunction();
-             if (b != null) {
-                  predicate.getExpressions().add(cb.greaterThanOrEqualTo(root.get("createDate").as(Date.class), b));
-             }
-             if (e != null) {
-                 predicate.getExpressions().add(cb.lessThanOrEqualTo(root.get("createDate").as(Date.class), e));
-            }
-             return predicate;
-             }
-        };
-        Page<Order> result = (Page<Order>) orderRepository.findAll(spec, pageRequest);
-        return result;
+    	 PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+         Page<Order> result ;
+         if(b!=null&&e!=null){
+        	 result =  (Page<Order>) orderRepository.findByCreateDateBetween(b,e, pageRequest);
+         }else{
+        	 result =  (Page<Order>) orderRepository.findAll( pageRequest);
+         }
+         return result;
     	}
-		public void delete(Long id){
+		public void delete(String id){
 			orderRepository.delete(id);
 		}
-		public Order findOrder(Long id){
+		public Order findOrder(String id){
 			  return orderRepository.findOne(id);
 		}
-		public Order find(Long id){
+		public Order find(String id){
 			  return orderRepository.findOne(id);
 		}
 		public void save(Order order){

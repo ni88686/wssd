@@ -1,12 +1,15 @@
 package com.pzy.repository;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.pzy.entity.User;
-public interface UserRepository extends PagingAndSortingRepository<User, Long>,JpaSpecificationExecutor<User>{
+public interface UserRepository  extends   MongoRepository< User, String>{
 	  public List<User> findByNameAndPassword(String userName,String password);
 	  public List<User> findByName(String userName);
+	public Page<User> findByNameLike(String name, Pageable pageRequest);
 }
 

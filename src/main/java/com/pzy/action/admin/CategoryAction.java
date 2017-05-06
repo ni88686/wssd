@@ -34,7 +34,7 @@ public class CategoryAction extends ActionSupport {
 	private Map<String, Object> resultMap = new HashMap<String, Object>();
 
 	private String name;
-	private Long id;
+	private String id;
 	private Category category;
 	private List<Category> categorys;
 	@Autowired
@@ -148,11 +148,11 @@ public class CategoryAction extends ActionSupport {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

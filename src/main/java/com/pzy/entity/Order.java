@@ -3,33 +3,24 @@ package com.pzy.entity;
  *订单
  *
  */
-import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.Date;
 
 import org.apache.struts2.json.annotations.JSON;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 /***
  *  @author 263608237@qq.com
  * @author Administrator
  *
  */
-@Entity
-@Table(name = "t_order")
+@Document(collection = "Order")  
 public class Order {
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@ManyToOne(fetch = FetchType.EAGER)
+	private String id;
 	private User user;
 	private Integer count;
-	private Double TotalPrice;
+	private Double totalPrice;
 	private Date createDate;
 	private String payType;
 	private String state;
@@ -40,10 +31,10 @@ public class Order {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public User getUser() {
@@ -60,10 +51,10 @@ public class Order {
 		this.count = count;
 	}
 	public Double getTotalPrice() {
-		return TotalPrice;
+		return totalPrice;
 	}
 	public void setTotalPrice(Double totalPrice) {
-		TotalPrice = totalPrice;
+		this.totalPrice = totalPrice;
 	}
 	@JSON(format="yyyy-MM-dd HH:mm")
 	public Date getCreateDate() {

@@ -30,7 +30,7 @@ public class AdminUserAction extends ActionSupport {
 	private Integer iDisplayLength = 10;
 	private Map<String, Object> resultMap = new HashMap<String, Object>();
 	private String name;
-	private Long id;
+	private String id;
 	private AdminUser adminuser;
 	private List<AdminUser> adminUsers;
 	
@@ -174,11 +174,11 @@ public class AdminUserAction extends ActionSupport {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

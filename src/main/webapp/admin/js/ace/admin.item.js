@@ -106,8 +106,8 @@ jQuery.adminItem = {
 						{
 							'aTargets' : [10],
 							'fnRender' : function(oObj, sVal) {
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminItem.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
-								 "  &nbsp;<button class=\"btn2 btn-info\" onclick=\"$.adminItem.deleteit("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminItem.showEdit('"+oObj.aData.id+"')\"><i class=\"icon-pencil\"></i>修改</button>"+
+								 "  &nbsp;<button class=\"btn2 btn-info\" onclick=\"$.adminItem.deleteit('"+oObj.aData.id+"')\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {
@@ -196,6 +196,7 @@ jQuery.adminItem = {
 		},
 		showaddModal: function(id){
 			$.adminItem.toSave=true;
+			$("input[name='item.id']").val("");
 			$("#modal_header_label").text("新增分类");
 			$("#item_modal").modal('show');
 		},

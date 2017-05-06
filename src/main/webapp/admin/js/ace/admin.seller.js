@@ -68,8 +68,8 @@ jQuery.adminSeller = {
 						{
 							'aTargets' : [6],
 							'fnRender' : function(oObj, sVal) {
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminSeller.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminSeller.deleteSeller("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminSeller.showEdit('"+oObj.aData.id+"')\"><i class=\"icon-pencil\"></i>修改</button>"+
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminSeller.deleteSeller('"+oObj.aData.id+"')\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {

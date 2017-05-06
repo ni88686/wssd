@@ -23,7 +23,7 @@ public class UserAction  extends ActionSupport{
      private Integer iDisplayStart=0;
      private Integer iDisplayLength=10;
      private String userName;
-     private Long id;
+     private String id;
      private User user;
 	 private Map<String,Object> resultMap= new HashMap<String,Object>();
      @Autowired
@@ -124,10 +124,10 @@ public class UserAction  extends ActionSupport{
      public void setUserName(String userName) {
           this.userName = userName;
      }
-     public Long getId() {
+     public String getId() {
           return id;
      }
-     public void setId(Long id) {
+     public void setId(String id) {
           this.id = id;
      }
      public User getUser() {

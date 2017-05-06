@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -40,7 +41,7 @@ public class ItemAction extends ActionSupport {
 	private Map<String, Object> resultMap = new HashMap<String, Object>();
 	
 	private String name;
-	private Long id;
+	private String id;
 	private Item item;
 	/**操作提示返回的消息*/
 	private String tip;
@@ -79,7 +80,9 @@ public class ItemAction extends ActionSupport {
 
 	@Action(value = "save", results = { @Result(name = "success", location = "/WEB-INF/views/admin/item/index.jsp") })
 	public String save() throws Exception {
-		if(item.getId()==null){
+		System.out.println("--fuckyou->"+id);
+		if(StringUtils.isBlank(item.getId())){
+			item.setId(null);
 			item.setImgPath(this.imgPathFileName);
 			/** 文件上传逻辑 */
 			String realpath = ServletActionContext.getServletContext().getRealPath("/upload");
@@ -87,6 +90,8 @@ public class ItemAction extends ActionSupport {
 			try {
 				FileUtils.copyFile(imgPath, saveImg);
 				item.setCreateDate(new Date(System.currentTimeMillis()));
+				item.setCategory(categoryService.find(item.getCategory().getId()));
+				item.setSeller(sellerService.find(item.getSeller().getId()));
 				itemService.save(item);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -94,13 +99,13 @@ public class ItemAction extends ActionSupport {
 			}
 		}else{
 			Item newitem=itemService.find(item.getId());
-			newitem.setCategory(item.getCategory());
+			newitem.setCategory(categoryService.find(item.getCategory().getId()));
 			newitem.setCount(item.getCount());
 			newitem.setName(item.getName());
 			newitem.setPrice(item.getPrice());
 			newitem.setRemark(item.getRemark());
 			newitem.setScore(item.getScore());
-			newitem.setSeller(item.getSeller());
+			newitem.setSeller(sellerService.find(item.getSeller().getId()));
 			itemService.save(newitem);
 		}
 		
@@ -192,11 +197,11 @@ public class ItemAction extends ActionSupport {
 		this.name = userName;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

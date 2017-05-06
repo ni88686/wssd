@@ -1,29 +1,24 @@
 package com.pzy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 /***
  *商家
  * @author 263608237@qq.com
  */
-@Entity
-@Table(name = "t_seller")
+@Document(collection = "Seller")  
 public class Seller {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	private String name;
 	private String addr;
 	private String tel;
 	private String userName;
 	private String detail;
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

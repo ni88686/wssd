@@ -1,27 +1,18 @@
 package com.pzy.entity;
 
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.apache.struts2.json.annotations.JSON;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 /***公告
  *  @author 263608237@qq.com
  *
  */
-@Entity
-@Table(name = "t_news")
+@Document(collection = "news")  
 public class News {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	private String title;
-	@Column(columnDefinition="TEXT") 
 	private String context;
 	
 	private Integer type;
@@ -40,10 +31,10 @@ public class News {
 	}
 	private Date createDate;
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTitle() {

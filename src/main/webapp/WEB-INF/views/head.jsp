@@ -39,7 +39,7 @@
           </div>
           <div class="span2">
             <form class="form-search top-search" action="search" method="post">
-              <input type="text" name='key' class="input-medium search-query" placeholder="搜索商品">
+              <input type="text" name='key' class="input-medium search-query" placeholder="搜索图书">
             </form>
           </div>
           

@@ -23,7 +23,7 @@ import com.pzy.service.MsgBoxService;
 @ParentPackage("json-default") 
 public class MsgBoxAction extends PageAction {
 	private String name;
-	private Long id;
+	private String id;
 	private MsgBox msgBox;
 	private String tip;
 	private String reply;
@@ -117,11 +117,11 @@ public class MsgBoxAction extends PageAction {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTip() {

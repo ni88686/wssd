@@ -1,34 +1,22 @@
 package com.pzy.entity;
-
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import org.apache.struts2.json.annotations.JSON;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 /***
  *商品明细
  * @author 263608237@qq.com
  */
-@Entity
-@Table(name = "t_Item")
+@Document(collection = "Item")  
 public class Item  {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	private String name;
 	private String remark;
 	private String imgPath;
 	private Double score;
-	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 
-	@ManyToOne(fetch = FetchType.EAGER)
 	private Seller seller;
 	
 	
@@ -88,11 +76,11 @@ public class Item  {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

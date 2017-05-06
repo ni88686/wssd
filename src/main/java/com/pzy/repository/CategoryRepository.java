@@ -1,9 +1,13 @@
 package com.pzy.repository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.pzy.entity.Category;
-public interface CategoryRepository extends PagingAndSortingRepository<Category, Long>,JpaSpecificationExecutor<Category>{
+public interface CategoryRepository extends   MongoRepository<Category, String>{
+
+	Page<Category> findByNameLike(String name, Pageable pageRequest);
     
 }
 

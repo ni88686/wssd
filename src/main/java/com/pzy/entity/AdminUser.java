@@ -1,19 +1,16 @@
 package com.pzy.entity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /***
  * 管理员用户
  * @author 263608237@qq.com
  */
-@Entity
-@Table(name = "t_adminuser")
+@Document(collection = "AdminUser")  
 public class AdminUser {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	private String name;
 	private String password;
 	private String remark;
@@ -23,10 +20,10 @@ public class AdminUser {
 	private String role4;
 	private String role5;
 	private String role6;
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

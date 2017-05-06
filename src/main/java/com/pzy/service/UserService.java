@@ -3,17 +3,12 @@ package com.pzy.service;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.pzy.entity.User;
@@ -34,25 +29,21 @@ public class UserService {
      public Page<User> findAll(final int pageNumber, final int pageSize,final String name){
          PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
         
-         Specification<User> spec = new Specification<User>() {
-              public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-              Predicate predicate = cb.conjunction();
-              if (name != null) {
-                   predicate.getExpressions().add(cb.like(root.get("name").as(String.class), name+"%"));
-              }
-              return predicate;
-              }
-         };
-         Page<User> result = (Page<User>) userRepository.findAll(spec, pageRequest);
+         Page<User> result ;
+         if(!StringUtils.isBlank(name)){
+        	 result =  (Page<User>) userRepository.findByNameLike(name, pageRequest);
+         }else{
+        	 result =  (Page<User>) userRepository.findAll( pageRequest);
+         }
          return result;
      }
-	public void delete(Long id){
+	public void delete(String id){
 	    userRepository.delete(id);
 	}
-	public User find(Long id){
+	public User find(String id){
 		  return userRepository.findOne(id);
 	}
-	public User find(String name){
+	public User findByname(String name){
 		  List<User> users=userRepository.findByName(name);
 		  if(users!=null&&users.size()>=1)
 			  return users.get(0);

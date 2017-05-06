@@ -43,7 +43,7 @@ color: #96979d  !important;
         <aside class="span3">
           <!-- Category-->
 
-          <h2 class="heading2"><span>商品分类</span></h2>
+          <h2 class="heading2"><span>图书分类</span></h2>
           <ul class="nav nav-list categories">
 	          <c:forEach items="${categorys }" var="bean">
 	           <li> <a href="gocategory?category.id=${bean.id }">${bean.name }</a> </li>

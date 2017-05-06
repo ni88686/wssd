@@ -89,8 +89,8 @@ jQuery.adminOrder = {
 							'aTargets' : [9],
 							'fnRender' : function(oObj, sVal) {
 								if(state=='待审核')
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminOrder.approveOk("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>发货</button>"+
-								 " <button class=\"btn2 btn-info\" onclick=\"$.adminOrder.approveNotOk("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>审核不通过</button>";
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminOrder.approveOk('"+oObj.aData.id+"')\"><i class=\"icon-pencil\"></i>发货</button>"+
+								 " <button class=\"btn2 btn-info\" onclick=\"$.adminOrder.approveNotOk('"+oObj.aData.id+"')\"><i class=\"icon-pencil\"></i>审核不通过</button>";
 								
 							}
 						},

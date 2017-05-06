@@ -2,23 +2,12 @@ package com.pzy.entity;
 
 import java.util.Date;
 
-/***
- * 分类
- *
- */
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.apache.struts2.json.annotations.JSON;
-@Entity
-@Table(name = "t_category")
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document(collection = "Category")  
 public class Category {
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@org.springframework.data.annotation.Id
+	private String id;
 	
 	private String name;
 	
@@ -26,10 +15,10 @@ public class Category {
 	
 	private Date createDate;
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

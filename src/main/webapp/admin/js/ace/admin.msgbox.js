@@ -78,8 +78,8 @@ jQuery.adminNews = {
 							'aTargets' : [6],
 							'fnRender' : function(oObj, sVal) {
 								return ""+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminNews.deleteNews("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>"+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminNews.showEdit("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 回复</button>";
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminNews.deleteNews('"+oObj.aData.id+"')\"><i class=\"icon-trash\"></i> 删除</button>"+
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminNews.showEdit('"+oObj.aData.id+"')\"><i class=\"icon-trash\"></i> 回复</button>";
 								
 							}
 						},
