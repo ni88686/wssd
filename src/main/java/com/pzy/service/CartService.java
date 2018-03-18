@@ -38,6 +38,11 @@ public class CartService {
     public List<Cart> findByOrder(Order order){
 		return cartRepository.findByOrder(order);
 	}
+    
+    public void deteteByOrder(Order order){
+  		 cartRepository.deleteByOrder(order);
+  	}
+    
     public Page<Cart> findAll(final int pageNumber, final int pageSize,final String state){
         PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
        

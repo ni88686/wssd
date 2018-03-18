@@ -50,18 +50,13 @@ jQuery.adminOrder = {
 							}
 						});
 					},
+					
 					"aoColumns" : [ {
 						"mDataProp" : "id"
 					} ,{
 						"mDataProp" : "createDate"
 					}, {
 						"mDataProp" : "user.name"
-					}, {
-						"mDataProp" : "item.name"
-					}, {
-						"mDataProp" : "count"
-					}, {
-						"mDataProp" : "item.price"
 					}, {
 						"mDataProp" : "totalPrice"
 					}, {
@@ -70,28 +65,37 @@ jQuery.adminOrder = {
 						"mDataProp" : "state"
 					}, {
 						"mDataProp" : ""
+					}, {
+						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [7],
+							'aTargets' : [4],
 							'fnRender' : function(oObj, sVal) {
 								return "<span class='label label-info'>"+sVal+"</span>";
 							}
 						},
 						{
-							'aTargets' : [8],
+							'aTargets' : [5],
 							'fnRender' : function(oObj, sVal) {
 								state=sVal;
 								return "<span class='label label-important'>"+sVal+"</span>";
 							}
 						},
 						{
-							'aTargets' : [9],
+							'aTargets' : [6],
+							'fnRender' : function(oObj, sVal) {
+								if(state=='待审核')
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminOrder.orderdetail("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>订单详情</button>";
+								
+							}
+						},
+						{
+							'aTargets' : [7],
 							'fnRender' : function(oObj, sVal) {
 								if(state=='待审核')
 								return "<button class=\"btn2 btn-info\" onclick=\"$.adminOrder.approveOk("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>发货</button>"+
 								 " <button class=\"btn2 btn-info\" onclick=\"$.adminOrder.approveNotOk("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>审核不通过</button>";
-								
 							}
 						},
 					 {
@@ -145,6 +149,38 @@ jQuery.adminOrder = {
 	        		});
 	            }
 	        });
+		},
+		
+		
+		orderdetail:function(id){
+			$.ajax({
+    			type : "get",
+    			url : $.ace.getContextPath() + "/admin/order/orderdetail?order.id="+id,
+    			dataType : "json",
+    			success : function(json) {
+    				if(json.resultMap.state=='success'){
+    					
+    					$("#detail_createDate").html(json.resultMap.order.createDate);
+    					$("#detail_username").html(json.resultMap.order.user.name);
+    					$("#detail_addr").html(json.resultMap.order.addr);
+    					$("#detail_totalPrice").html(json.resultMap.order.totalPrice);
+    					$("#book_detail").empty();
+    					for(var i=0;i<json.resultMap.car.length;i++){
+    						$("#book_detail").append("<tr>"+
+										"<td>"+json.resultMap.car[i].item.name+"</td>"+
+										"<td>"+json.resultMap.car[i].item.price+"</td>"+
+										"<td>"+json.resultMap.car[i].count+"</td>"+
+										"</tr>");
+    					}
+    					
+    					$("#user_modal_header_label").text("新增分类");
+    					$("#order_modal").modal('show');
+    					
+    				}else{
+    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+    				}
+    			}
+    		});
 		},
 		showaddModal: function(id){
 			$.adminOrder.toSave=true;

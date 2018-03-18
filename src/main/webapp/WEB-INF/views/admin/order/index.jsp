@@ -23,6 +23,12 @@
 	    });
 	});
 </script>
+<style >
+
+#order_123{
+background: white !important;
+}
+</style>
 </head>
 <body>
 	<div class="layout">
@@ -62,9 +68,6 @@
 											<th >流水号</th>
 											<th >创建日期</th>
 											<th >下单人</th>
-											<th >商品</th>
-											<th >数量</th>
-											<th >单价</th>
 											<th >总价</th>
 											<th >付款方式</th>
 											<th >订单状态</th>
@@ -84,38 +87,69 @@
 	</div>
 
 	<!-- 编辑新增弹出框 -->
-	<div class="modal hide fade" id="order_modal">
+	<div class="modal hide fade" id="order_modal" style="background: white;">
 		<div class="modal-header blue">
 			<button type="button" class="close" data-dismiss="modal">×</button>
 			<label id="order_modal_header_label"></label>
 		</div>
-		<div class="modal-body" style="min-height: 200px;">
+		<div class="modal-body" id='order_123' style="min-height: 400px;" >
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="form-container grid-form form-background left-align form-horizontal">
 						<form action="" method="get" id=''>
 							<input type="hidden" id="orderId" value="">
 							<div class="control-group">
-								<label for="name" class="control-label">分类名称：</label>
+								<label for="name" class="control-label">订单日期：</label>
 								<div class="controls">
-									<input type="text" id="name" placeholder="">
+									<span id='detail_createDate'></span>
 								</div>
 							</div>
 							<div class="control-group" id='control_project'>
-								<label for="remark" class="control-label">备注：</label>
+								<label for="remark" class="control-label">客户：</label>
 								<div class="controls">
-									<textarea id="remark" placeholder="" rows="3">
-									</textarea>
+										<span id='detail_username'></span>
 								</div>
 							</div>
+							
+							<div class="control-group" id='control_project'>
+								<label for="remark" class="control-label">地址：</label>
+								<div class="controls">
+										<span id='detail_addr'></span>
+								</div>
+							</div>
+							
+							
+							<div class="control-group" id='control_project'>
+								<label for="remark" class="control-label">总金额：</label>
+								<div class="controls">
+										<span id='detail_totalPrice'></span>
+								</div>
+							</div>
+							
+							
+							
 						</form>
 					</div>
+					
+					<table  class="responsive table table-striped table-bordered"
+									id="dt_order_view">
+							<thead> 
+									<tr>
+										<td>图书名称</td>
+										<td>单价</td>
+										<td>数量</td>
+									</tr>
+							</thead>
+						<tbody id='book_detail'>
+							
+						</tbody>
+						
+					</table>
 				</div>
 			</div>
 		</div>
 		
 		<div class="modal-footer center" id="div_footer">
-			<a class="btn btn-primary" onclick="$.adminOrder.save()">保存</a>
 			<a href="#" class="btn" data-dismiss="modal" id="closeViewModal">关闭</a>
 		</div>
 	</div>

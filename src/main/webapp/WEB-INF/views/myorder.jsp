@@ -52,7 +52,10 @@
             <td class="model">${bean.createDate}</td>
             <td class="model"><span class='label label-info'> ${bean.payType}</span></td>
             <td class="model"><span class='label label-important'>  ${bean.state}</span></td>
-             <td class="model"><a href="${pageContext.request.contextPath}/orderdetail?order.id=${bean.id}">查看详情</a> </td>
+             <td class="model"><a href="${pageContext.request.contextPath}/orderdetail?order.id=${bean.id}">查看详情</a>
+             
+             <a href="${pageContext.request.contextPath}/orderdelete?order.id=${bean.id}">取消订单</a>
+              </td>
           </tr>
           </c:forEach>
           

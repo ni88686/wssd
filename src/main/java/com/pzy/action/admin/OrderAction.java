@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.pzy.entity.Order;
+import com.pzy.service.CartService;
 import com.pzy.service.OrderService;
 /***
  * 订单管理
@@ -35,7 +36,8 @@ public class OrderAction extends ActionSupport {
 	private List<Order> orders;
 	@Autowired
 	private OrderService orderService;
-
+	@Autowired
+	private CartService cartService;
 	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/order/index.jsp") })
 	public String index() {
 		orders = orderService.findOrders();
@@ -101,6 +103,20 @@ public class OrderAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	
+	@Action(value = "orderdetail", results = { @Result(name = "success", type = "json") }, params = {
+			"contentType", "text/html" })
+	public String orderdetail() {
+		Order bean = orderService.find(order.getId());
+
+		resultMap.put("order", bean);
+		resultMap.put("car", cartService.findByOrder(bean));
+		resultMap.put("state", "success");
+		resultMap.put("msg", "修改成功");
+		return SUCCESS;
+	}
+	
+	
 	@Action(value = "update", results = { @Result(name = "success", type = "json") }, params = {
 			"contentType", "text/html" })
 	public String update() {

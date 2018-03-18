@@ -206,6 +206,26 @@ public class IndexAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	@Action(value = "orderdelete", results = {
+			@Result(name = "success", location = "/WEB-INF/views/myorder.jsp"),
+			@Result(name = "login", location = "/WEB-INF/views/login.jsp") })
+	public String orderdelete() throws Exception {
+		User user = (User) ServletActionContext.getRequest().getSession()
+				.getAttribute("user");
+		if (user == null) {
+			tip = "您还没有登录，请登录后在查询！";
+			return LOGIN;
+		} else {
+			tip = "订单取消成功！！";
+			this.carsCartService.deteteByOrder(order);
+			orderService.delete(this.order.getId());
+			orders = orderService.findByUser(user);
+		}
+		return SUCCESS;
+	}
+	
+	
 	/***
 	 * 提交订单动作
 	 * @return
