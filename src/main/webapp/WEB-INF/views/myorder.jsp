@@ -43,6 +43,7 @@
              <th class="quantity">下单日期</th>
               <th class="quantity">付款方式</th>
               <th class="quantity">状态</th>
+               <th class="quantity">付款</th>
                 <th class="quantity">操作</th>
           </tr>
           <c:forEach items="${orders }" var="bean">
@@ -52,6 +53,7 @@
             <td class="model">${bean.createDate}</td>
             <td class="model"><span class='label label-info'> ${bean.payType}</span></td>
             <td class="model"><span class='label label-important'>  ${bean.state}</span></td>
+            <td class="model"><span class='label label-important'>  未付款</span></td>
              <td class="model"><a href="${pageContext.request.contextPath}/orderdetail?order.id=${bean.id}">查看详情</a>
              
              <a href="${pageContext.request.contextPath}/orderdelete?order.id=${bean.id}">取消订单</a>

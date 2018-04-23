@@ -102,15 +102,14 @@ border-radius: 3px 3px 3px 3px; height: 260px">
 			          <h1 class="heading1"><span class="maintext">最新上传</span></h1>
 			          <ul class="thumbnails">
 			            <c:forEach items="${itemNews}" var="bean">
-				        <li class="span3">
-				          <a class="prdocutname" href="product.html">${bean.name } </a>
+				          <li class="span3">
+				         
 				          <div class="thumbnail">
-				            <span class="new tooltip-test" data-original-title="">Sale</span>
-				            <a href="${pageContext.request.contextPath}/detail?item.id=${bean.id}"><img alt="" src="${pageContext.request.contextPath}/upload/${bean.imgPath}"></a>
-				           
+				            <span class="sale tooltip-test" data-original-title="">Sale</span>
+				            <a href="${pageContext.request.contextPath}/detail?item.id=${bean.id}"><img height="360px" alt="" src="${pageContext.request.contextPath}/upload/${bean.imgPath}"></a>
+				            <a class="prdocutname" href="product.html">${bean.name } </a>
 				            <div class="pricetag">
-				               <span class="spiral"></span><a href="${pageContext.request.contextPath}/goorder?item.id=${bean.id}" class="productcart">  立 即 购 买！</a>
-				            
+				              <span class="spiral"></span><a href="${pageContext.request.contextPath}/goorder?item.id=${bean.id}" class="productcart">  立 即 购 买！</a>
 				              <div class="price">
 				                <div class="pricenew">¥${bean.price}</div>
 				              </div>

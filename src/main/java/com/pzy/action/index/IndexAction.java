@@ -225,7 +225,16 @@ public class IndexAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	@Action(value = "dopay", results = {
+			@Result(name = "success", location = "/WEB-INF/views/myorder.jsp")
+			})
+	public String dopay() throws Exception {
+		User user = (User) ServletActionContext.getRequest().getSession()
+				.getAttribute("user");
+		orders = orderService.findByUser(user);
+		this.tip = "支付成功！";
+		return SUCCESS;
+	}
 	/***
 	 * 提交订单动作
 	 * @return
@@ -234,7 +243,8 @@ public class IndexAction extends ActionSupport {
 	@Action(value = "gotoorder", results = {
 			@Result(name = "success", location = "/WEB-INF/views/myorder.jsp"),
 			@Result(name = "input", location = "/WEB-INF/views/order.jsp"),
-			@Result(name = "login", location = "/WEB-INF/views/login.jsp") })
+			@Result(name = "login", location = "/WEB-INF/views/login.jsp"),
+			@Result(name = "pay", location = "/WEB-INF/views/pay.jsp")})
 	public String order() throws Exception {
 		User user = (User) ServletActionContext.getRequest().getSession()
 				.getAttribute("user");
@@ -266,7 +276,12 @@ public class IndexAction extends ActionSupport {
 			this.tip = "下单成功，请等待客服审核！";
 			orders = orderService.findByUser(user);
 			 ServletActionContext.getRequest().getSession().removeAttribute("carts");
-			return SUCCESS;
+			if(!"货到付款".equals(order.getPayType())) {
+				return "pay";
+			}
+				
+			else
+			 return SUCCESS;
 		}
 
 	}
